@@ -10,8 +10,11 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { UserDto } from './dtos/user.dto';
+import { Serialize } from 'src/interceptors/serialize';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private userService: UsersService) {}
   @Post('/signup')
@@ -19,7 +22,7 @@ export class UsersController {
     this.userService.create(body.email, body.hashedPassword);
   }
   @Get('/:id')
-  findUser(@Param('id') id: string) {
+  async findUser(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
   @Get()
