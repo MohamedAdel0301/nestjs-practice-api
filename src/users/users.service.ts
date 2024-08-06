@@ -22,6 +22,19 @@ export class UsersService {
     }
     return user;
   }
+
+  async findOneEmail(email: string) {
+    const user = await this.repo.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
+
   findAll() {
     return this.repo.find();
   }

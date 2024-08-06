@@ -3,5 +3,5 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
   @IsString()
-  hashedPassword: string;
+  password: string;
 }
