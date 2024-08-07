@@ -8,15 +8,20 @@ import {
   Param,
   Delete,
   Session,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
 import { Serialize } from 'src/interceptors/serialize';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
+@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(
     private userService: UsersService,
@@ -35,12 +40,12 @@ export class UsersController {
     return user;
   }
   @Post('/signout')
-  signOut(@Session() session:any){
+  signOut(@Session() session: any) {
     session.userId = null;
   }
   @Get('/whoami')
-  whoAmI(@Session() session: any) {
-    return this.userService.findOne(session.userId);
+  whoAmI(@CurrentUser() user: User) {
+    return user;
   }
   @Get('/:id')
   async findUser(@Param('id') id: string) {
