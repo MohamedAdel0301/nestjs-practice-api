@@ -33,7 +33,7 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    const [salt, storedHash] = user.hashedPassword.split('.');
+    const [salt, storedHash] = user.password.split('.');
 
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 

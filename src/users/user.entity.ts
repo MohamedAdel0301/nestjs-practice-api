@@ -16,7 +16,7 @@ export class User {
   })
   email: string;
   @Column()
-  hashedPassword: string;
+  password: string;
 
   @AfterInsert()
   logInsert() {

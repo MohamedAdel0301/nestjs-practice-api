@@ -63,7 +63,7 @@ export class UsersController {
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.userService.update(id, {
       email: body.email,
-      hashedPassword: body.hashedPassword,
+      password: body.password,
     });
   }
 }

@@ -5,5 +5,5 @@ export class UpdateUserDto {
   email: string;
   @IsString()
   @IsOptional()
-  hashedPassword: string;
+  password: string;
 }
