@@ -9,6 +9,6 @@ import { CurrentUserInterceptor } from './interceptors/current-user.interceptor'
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
-  providers: [UsersService, AuthService,CurrentUserInterceptor],
+  providers: [UsersService, AuthService, CurrentUserInterceptor],
 })
 export class UsersModule {}

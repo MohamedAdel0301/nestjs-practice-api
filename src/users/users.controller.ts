@@ -1,3 +1,4 @@
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { AuthService } from './auth.service';
 import {
   Body,
@@ -14,8 +15,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
-import { Serialize } from 'src/interceptors/serialize';
-import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { Serialize } from '../interceptors/serialize';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 
