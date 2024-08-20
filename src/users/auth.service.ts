@@ -14,7 +14,6 @@ export class AuthService {
   constructor(private userService: UsersService) {}
   async signUp(email: string, password: string) {
     const user = await this.userService.findOneEmail(email);
-    console.log(user);
     if (user) {
       throw new BadRequestException('Email in use');
     }
