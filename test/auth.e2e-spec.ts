@@ -20,13 +20,28 @@ describe('Authentication System', () => {
       request(app.getHttpServer())
         //making a request to our http server
         .post('/auth/signup')
-        .send({ email: 'example18@gmail.com', password: 'example18' })
+        .send({ email: 'example19@gmail.com', password: 'example19' })
         .expect(201)
         .then((res) => {
           const { id, email } = res.body;
           expect(id).toBeDefined();
-          expect(email).toEqual('example18@gmail.com');
+          expect(email).toEqual('example19@gmail.com');
         })
     );
+  });
+  it('signup as a new user then get the currently logged in user', async () => {
+    const email = 'asdf@asdf.com';
+    const res = await request(app.getHttpServer())
+      .post('/auth/signup')
+      .send({ email, password: 'asdf' })
+      .expect(201);
+    const cookie = res.get('Set-Cookie');
+
+    const { body } = await request(app.getHttpServer())
+      .get('/auth/whoami')
+      .set('Cookie', cookie)
+      .expect(200);
+
+    expect(body.email).toEqual(email);
   });
 });
